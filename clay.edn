@@ -1,0 +1,3 @@
+{:kindly/options {:element/max-height nil
+                  :element/max-width nil
+                  :element/style {:width "inherit"}}}

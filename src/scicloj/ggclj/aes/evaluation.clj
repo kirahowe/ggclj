@@ -1,4 +1,8 @@
-(ns scicloj.ggclj.aes.evaluation)
+(ns scicloj.ggclj.aes.evaluation
+  (:require
+   [clojure.set :as set]
+   [scicloj.ggclj.util :as util]
+   [tablecloth.api :as tc]))
 
 (defn make-mapping
   "Extracts the aesthetic mapping from user input.
@@ -25,3 +29,13 @@
   (-> mapping
       (select-keys [:x :y])
       (update-vals name)))
+
+(defn- apply-mappings [{:keys [mapping] :as layer}]
+  (let [output-mapping (set/map-invert mapping)
+        cols-to-keep (-> output-mapping keys (conj :panel))]
+    (update layer :data #(-> %
+                             (tc/select-columns cols-to-keep)
+                             (tc/rename-columns output-mapping)))))
+
+(defn compute-aesthetics [plot-spec]
+  (util/update-layers plot-spec apply-mappings))

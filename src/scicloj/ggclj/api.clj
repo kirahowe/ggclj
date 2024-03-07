@@ -1,6 +1,10 @@
 (ns scicloj.ggclj.api
   (:require [tablecloth.api :as tc]
-            [scicloj.ggclj.aes.evaluation :as aes]))
+            [scicloj.ggclj.aes.evaluation :as aes]
+            [scicloj.ggclj.coords.coords :as coords]
+            [scicloj.ggclj.theme.theme :as theme]
+            [scicloj.ggclj.geom.geom :as geom]
+            [scicloj.ggclj.layout :as layout]))
 
 (defn ->dataset [data]
   (if (= (type data) tech.v3.dataset.impl.dataset.Dataset)
@@ -39,8 +43,8 @@
       :scales {}
       :guides {}
       :mapping mapping
-      :theme []
-      :coords {}
+      :theme theme/default-theme
+      :coords coords/default-coords
       :facet {}
       :layout {}
       :labels (aes/make-labels mapping)})))
@@ -48,35 +52,65 @@
 (defn aes [& args]
   (apply aes/make-mapping args))
 
-(defn ggplot-build [plot-spec]
-  ;; prepares user input for conversion into graphical primitives
+(defn ggplot-build
+  "Build ggplot for rendering"
+  [plot-spec]
+  ;; maybe not necessary.. assoc a blank layer if there are none
+  ;; (let [layers (if (seq layers) layers [gb/geom-blank])]
+  ;;   (-> plot-spec
+  ;;       (assoc :layers layers )))
+  (-> plot-spec
+      ;; - get data (argument, inherit, or compute from inherited)
+      ;; - plot coordinate system first
+      ;; - faceting system (add `PANEL` column)
+      ;; - convert layer data into calculated aesthetic values
+      ;;   - calculate `group`
 
-  ;; - get data (argument, inherit, or compute from inherited)
-  ;; - plot coordinate system first
-  ;; - faceting system (add `PANEL` column)
-  ;; - convert layer data into calculated aesthetic values
-  ;;   - calculate `group`
+      ;; Give each layer a copy of the data, the mappings and the
+      ;; execution environment, done on the fly
 
-  ;; DATA TRANSFORMATION
-  ;; - 1. apply scale transformations
-  ;; - 2. map position aesthetics using position scales
-  ;;   - apply oob args, remove missing values, apply limits, breaks
-  ;; - 3. statistical transformation
-  ;; - 4. geom application
-  ;; - 5. train and map non-positional aesthetics
-  ;; - 6. last-chance stat and facet mods
+      ;; Initialise panels, add extra data for margins & missing
+      ;; facetting variables, and add on a PANEL variable to data
+      ;; (update :layout layout/setup-layout)
+      layout/setup-layout
+
+      ;; Compute aesthetics to produce data with generalised variable names
+      aes/compute-aesthetics
+
+      ;; - 1. apply scale transformations
+      ;; - 2. map position aesthetics using position scales
+      ;;   - apply oob args, remove missing values, apply limits, breaks
+      ;; - 3. statistical transformation
+      ;; - 4. geom application
+      geom/setup-data
+      ;; - 5. train and map non-positional aesthetics
+      ;; - 6. last-chance stat and facet mods
+      ))
+
+
+
+(comment
+  (require '[scicloj.ggclj.geom.point :as point])
+  (require '[scicloj.ggclj.data :refer [mtcars]])
+
+  ;; (-> (ggplot mtcars (aes "wt" "mpg"))
+  ;;     point/geom-point
+  ;;     ggplot-build
+  ;;     ggplot-draw)
   )
 
-(defn gtable [ggplot-built]
-   )
 
-;; {:layers [],
-;;  :scales nil,
-;;  :guides nil,
-;;  :mapping {:x [~cty], :y [~hwy]},
-;;  :theme [],
-;;  :coordinates nil,
-;;  :facet nil,
-;;  :plot_env nil,
-;;  :layout nil,
-;;  :labels {:x ["cty"], :y ["hwy"]}}
+
+  ;; (:buffer)
+  ;; (c2d/with-canvas-> canvas ;; prepare drawing context in canvas
+;;     (c2d/set-background 10 5 5) ;; clear background
+;;     (c2d/set-color 210 210 200) ;; set color
+;;     (c2d/rect 100 100 400 400) ;; draw rectangle
+;;     (c2d/set-color 50 50 60) ;; set another color
+;;     (c2d/set-stroke 2.0) ;; set line width
+;;     ;; (c2d/line 50 300 550 300) ;; draw line
+;;     (c2d/set-font-attributes 30.0) ;; set font size
+;;     (c2d/set-color :maroon) ;; set current color
+;;     ;; (c2d/text "Hello World!" 110 130)
+;; )
+  ;; draw line
