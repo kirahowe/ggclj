@@ -93,10 +93,11 @@
   (require '[scicloj.ggclj.geom.point :as point])
   (require '[scicloj.ggclj.data :refer [mtcars]])
 
-  ;; (-> (ggplot mtcars (aes "wt" "mpg"))
-  ;;     point/geom-point
-  ;;     ggplot-build
-  ;;     ggplot-draw)
+  (-> (ggplot mtcars (aes "wt" "mpg"))
+      ;; point/geom-point
+      ;; ggplot-build
+      )
+
   )
 
 

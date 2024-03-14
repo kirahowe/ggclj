@@ -24,19 +24,21 @@
       (:buffer c))))
 
 
-(->
-    (gg/ggplot mtcars (gg/aes "wt" "mpg"))
-   ;; (gg/ggplot)
-    point/geom-point
-    gg/ggplot-build
-    ggplot-draw
-    )
+
 
 
 (comment
   (require '[scicloj.ggclj.api :as gg])
   (require '[scicloj.ggclj.geom.point :as point])
   (require '[scicloj.ggclj.data :refer [mtcars]])
+
+  (->
+   (gg/ggplot mtcars (gg/aes "wt" "mpg"))
+   ;; (gg/ggplot)
+   point/geom-point
+   gg/ggplot-build
+   ggplot-draw)
+
   )
 
 (comment
