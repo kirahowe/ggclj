@@ -1,4 +1,4 @@
-(ns scicloj.ggclj.plotly
+(ns plotly
   (:require [scicloj.kindly.v4.kind :as kind]
             [charred.api :as charred]
             [clojure.math :as math]
