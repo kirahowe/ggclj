@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>scicloj.ggclj.plotly</title>
+<title>plotly</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,16 +57,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="scicloj.ggclj.plotly_files/libs/clipboard/clipboard.min.js"></script>
-<script src="scicloj.ggclj.plotly_files/libs/quarto-html/quarto.js"></script>
-<script src="scicloj.ggclj.plotly_files/libs/quarto-html/popper.min.js"></script>
-<script src="scicloj.ggclj.plotly_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="scicloj.ggclj.plotly_files/libs/quarto-html/anchor.min.js"></script>
-<link href="scicloj.ggclj.plotly_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="scicloj.ggclj.plotly_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="scicloj.ggclj.plotly_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="scicloj.ggclj.plotly_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="scicloj.ggclj.plotly_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="plotly_files/libs/clipboard/clipboard.min.js"></script>
+<script src="plotly_files/libs/quarto-html/quarto.js"></script>
+<script src="plotly_files/libs/quarto-html/popper.min.js"></script>
+<script src="plotly_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="plotly_files/libs/quarto-html/anchor.min.js"></script>
+<link href="plotly_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="plotly_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="plotly_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="plotly_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="plotly_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <link rel="icon" href="data:,">
 
 
@@ -91,10 +91,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 <style>.clay-limit-image-width .clay-image {max-width: 100%}
 </style>
-<script src="scicloj.ggclj.plotly_files/md-default0.js" type="text/javascript"></script>
-<script src="scicloj.ggclj.plotly_files/md-default1.js" type="text/javascript"></script>
+<script src="plotly_files/md-default0.js" type="text/javascript"></script>
+<script src="plotly_files/md-default1.js" type="text/javascript"></script>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb1"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">ns</span> scicloj.ggclj.plotly</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">ns</span> plotly</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  (<span class="at">:require</span> [scicloj.kindly.v4.kind <span class="at">:as</span> kind]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>            [charred.api <span class="at">:as</span> charred]</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>            [clojure.math <span class="at">:as</span> math]</span>
