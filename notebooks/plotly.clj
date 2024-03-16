@@ -230,9 +230,4 @@
 (-> mtcars
     (gg/ggplot (gg/aes "wt" "mpg"))
     point/geom-point
-    gg/ggplot-build)
-
-(-> mtcars
-    (gg/ggplot (gg/aes "wt" "mpg"))
-    point/geom-point
     ggplotly)
