@@ -60,6 +60,9 @@
   ;;   (-> plot-spec
   ;;       (assoc :layers layers )))
   (-> plot-spec
+
+      ;; - source (data) -> variables -> algebra -> scales -> statistics -> geometry -> coordinates -> aesthetics -> (graphic) renderer
+
       ;; - get data (argument, inherit, or compute from inherited)
       ;; - plot coordinate system first
       ;; - faceting system (add `PANEL` column)
