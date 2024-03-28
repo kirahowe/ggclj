@@ -59,6 +59,8 @@
   ;; (let [layers (if (seq layers) layers [gb/geom-blank])]
   ;;   (-> plot-spec
   ;;       (assoc :layers layers )))
+
+  ;; source (data) -> variables -> algebra -> scales -> statistics -> geometry -> coordinates -> aesthetics -> (graphic) renderer
   (-> plot-spec
 
       ;; - source (data) -> variables -> algebra -> scales -> statistics -> geometry -> coordinates -> aesthetics -> (graphic) renderer
