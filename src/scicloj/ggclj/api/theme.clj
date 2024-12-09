@@ -1,4 +1,4 @@
-(ns scicloj.ggclj.theme.theme)
+(ns scicloj.ggclj.api.theme)
 
 (def default-theme
   {:width 600
