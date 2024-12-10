@@ -57,7 +57,7 @@
   (-> (gg/plot mtcars {:x "wt" :y "mpg" :colour "gear"})
       (gg/layer {:geom :point})
       (gg/layer {:geom :line :stat :lm})
-      (facet/wrap :gear)
+      (facet/wrap "gear")
       ggplot-build)
 
   ;; ggplot (mpg, aes (displ, hwy, color = drv)) +
@@ -71,7 +71,8 @@
       (gg/layer {:stat :smooth :opts {:method :lm :formula (fn [x b a] (-> (* b x) (+ a)))}})
       (facet/wrap "year")
       (layout/title "A plot for expository purposes")
-      ggplot-build)
+      ggplot-build
+      )
 
   (-> (gg/plot mtcars)
       (gg/layer {:geom :point

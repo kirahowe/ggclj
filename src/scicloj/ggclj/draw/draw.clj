@@ -1,27 +1,27 @@
 (ns scicloj.ggclj.draw.draw
   (:require
-   [clojure2d.core :as c2d]
+   ;; [clojure2d.core :as c2d]
    [tablecloth.api :as tc]))
 
-(defn ggplot-draw [{:keys [theme layers] :as ggplot-built}]
-  (let [width (Math/ceil (apply max (map :xmax layers)))
-        height (Math/ceil (apply max (map :ymax layers)))
-        canvas (c2d/canvas 600 400)]
-    (c2d/with-canvas [c canvas]
-      (c2d/set-background c (:panel-background theme))
+;; (defn ggplot-draw [{:keys [theme layers] :as ggplot-built}]
+;;   (let [width (Math/ceil (apply max (map :xmax layers)))
+;;         height (Math/ceil (apply max (map :ymax layers)))
+;;         canvas (c2d/canvas 600 400)]
+;;     (c2d/with-canvas [c canvas]
+;;       (c2d/set-background c (:panel-background theme))
 
-      (doseq [{:keys [data]} layers]
-        (doseq [{:keys [x y stroke colour size shape] :as row} (tc/rows data :as-maps)]
-          (c2d/set-stroke c stroke)
+;;       (doseq [{:keys [data]} layers]
+;;         (doseq [{:keys [x y stroke colour size shape] :as row} (tc/rows data :as-maps)]
+;;           (c2d/set-stroke c stroke)
 
-          ;; handle colours properly here
-          (c2d/set-color c (keyword colour))
+;;           ;; handle colours properly here
+;;           (c2d/set-color c (keyword colour))
 
-          ;; switch on shape here..
-          (c2d/ellipse c x y size size))
-        )
+;;           ;; switch on shape here..
+;;           (c2d/ellipse c x y size size))
+;;         )
 
-      (:buffer c))))
+;;       (:buffer c))))
 
 
 
@@ -32,12 +32,12 @@
   (require '[scicloj.ggclj.geom.point :as point])
   (require '[scicloj.ggclj.data :refer [mtcars]])
 
-  (->
-   (gg/ggplot mtcars (gg/aes "wt" "mpg"))
-   ;; (gg/ggplot)
-   point/geom-point
-   gg/ggplot-build
-   ggplot-draw)
+  ;; (->
+  ;;  (gg/ggplot mtcars (gg/aes "wt" "mpg"))
+  ;;  ;; (gg/ggplot)
+  ;;  point/geom-point
+  ;;  gg/ggplot-build
+  ;;  ggplot-draw)
 
   )
 

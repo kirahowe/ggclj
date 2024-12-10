@@ -1,22 +1,22 @@
 (ns scicloj.ggclj.geom.point
   (:require [scicloj.ggclj.util :as util]
-            [scicloj.ggclj.geom.geom :as geom]))
+            ))
 
-(defn geom-point
-  ([plot-spec]
-   (geom-point plot-spec (:mapping plot-spec) (:data plot-spec)))
+;; (defn geom-point
+;;   ([plot-spec]
+;;    (geom-point plot-spec (:mapping plot-spec) (:data plot-spec)))
 
-  ([plot-spec mapping]
-   (geom-point plot-spec mapping (:data plot-spec)))
+;;   ([plot-spec mapping]
+;;    (geom-point plot-spec mapping (:data plot-spec)))
 
-  ([plot-spec mapping data]
-   (util/add-layer plot-spec {:mapping mapping
-                              :data data
-                              :geom (geom/default-aes "point")
-                              :stat "identity"
-                              :position "identity"}))
-  ;; support passing data/mappings in as an opts map?
-  )
+;;   ([plot-spec mapping data]
+;;    (util/add-layer plot-spec {:mapping mapping
+;;                               :data data
+;;                               :geom (geom/default-aes "point")
+;;                               :stat "identity"
+;;                               :position "identity"}))
+;;   ;; support passing data/mappings in as an opts map?
+;;   )
 
 
 
