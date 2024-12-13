@@ -1,5 +1,6 @@
 (ns scicloj.ggclj.build.core
   (:require
+   [scicloj.ggclj.build.aesthetics :as aes]
    [scicloj.ggclj.build.layers :as layers]
    [scicloj.ggclj.build.facets :as facets]))
 
@@ -18,14 +19,18 @@
 
       ;; - get data (argument, inherit, or compute from inherited)
       (layers/process)
+
       ;; - plot coordinate system first
       ;; - faceting system (add `PANEL` column)
 
+      ;; TODO: can some/all of this be done for each layer from here rather than in each build step?
       (facets/setup)
 
 
       ;; - convert layer data into calculated aesthetic values
       ;;   - calculate `group` from interaction of all non-continuous aesthetics
+
+      (aes/evaluate)
 
       ;; Give each layer a copy of the data, the mappings and the
       ;; execution environment, done on the fly
@@ -60,13 +65,13 @@
       (facet/wrap "gear")
       ggplot-build)
 
-  ;; ggplot (mpg, aes (displ, hwy, color = drv)) +
+  ;; ggplot (mpg, aes (displ, hwy, colour = drv)) +
   ;;   geom_point (position = "jitter") +
   ;;   geom_smooth (method = "lm", formula = y ~x) +
   ;;   facet_wrap (vars (year)) +
   ;;   ggtitle ("A plot for expository purposes")
 
-  (-> (gg/plot mpg {:x "displ" :y "hwy" :color "drv"})
+  (-> (gg/plot mpg {:x "displ" :y "hwy" :colour "drv"})
       (gg/layer {:geom :point :opts {:position :jitter}})
       (gg/layer {:stat :smooth :opts {:method :lm :formula (fn [x b a] (-> (* b x) (+ a)))}})
       (facet/wrap "year")

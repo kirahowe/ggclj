@@ -11,8 +11,7 @@
   (get-in plot-spec [:facets :vars])
   )
 
-(defn setup-facets [plot-spec layer-spec]
-  ;; TODO: Add PANEL column to each layer's dataset here
+(defn- add-panel-column [plot-spec layer-spec]
   (let [facet-vars (get-facet-vars plot-spec)
         panel-map (-> layer-spec
                       :data
@@ -21,11 +20,11 @@
                       (tc/order-by facet-vars)
                       (tc/rows)
                       (zipmap (range)))]
-
     (-> layer-spec
-        :data
-        (tc/map-columns :panel facet-vars (fn [& args] (get panel-map args))))))
+        (update :data (fn [ds]
+                        (tc/map-columns ds :panel facet-vars
+                                        (fn [& args] (get panel-map args))))))))
 
 (defn setup [plot-spec]
   (-> plot-spec
-      (utils/update-layers (partial setup-facets plot-spec))))
+      (utils/update-layers (partial add-panel-column plot-spec))))

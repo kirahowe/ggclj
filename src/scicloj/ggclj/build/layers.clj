@@ -7,7 +7,7 @@
    [scicloj.ggclj.stat :as stat]
    [tablecloth.api :as tc]))
 
-(defn- extract-relevant-layer-data [{:keys [mapping] :as layer-mapping} plot-spec]
+(defn extract-relevant-layer-data [{:keys [mapping] :as layer-mapping} plot-spec]
   (let [relevant-columns (-> (vals mapping)
                              (conj (facets/get-facet-vars plot-spec))
                              flatten
